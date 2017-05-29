@@ -34,7 +34,7 @@ public class ObservableController {
 
             return Collections.singletonMap(
                     "message",
-                    "Hello World!"
+                    "Hello World from Observable!"
             );
         }).subscribeOn(Schedulers.computation());
     }

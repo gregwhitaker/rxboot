@@ -19,8 +19,9 @@ import java.util.List;
 
 /**
  * Spring application configuration. This class configures Spring's {@link RequestMappingHandlerAdapter}
- * by adding {@link ObservableReturnValueHandler} and {@link FlowableReturnValueHandler}. This creates a return value mapping for controllers returning
- * straight {@link io.reactivex.Observable} and {@link io.reactivex.Flowable} types.
+ * by adding {@link ObservableReturnValueHandler}, {@link FlowableReturnValueHandler}, and
+ * {@link SingleReturnValueHandler}. This creates a return value mapping for controllers returning
+ * straight {@link io.reactivex.Observable}, {@link io.reactivex.Flowable}, and {@link io.reactivex.Single} types.
  */
 @Configuration
 public class RxbootConfiguration {
@@ -35,6 +36,7 @@ public class RxbootConfiguration {
         );
         handlers.add(0, observMethodReturnValueHandler());
         handlers.add(1, flowableMethodReturnValueHandler());
+        handlers.add(2, singleMethodReturnValueHandler());
 
         mappingHandlerAdapter.setReturnValueHandlers(handlers);
     }
@@ -47,5 +49,9 @@ public class RxbootConfiguration {
     @Bean
     public HandlerMethodReturnValueHandler flowableMethodReturnValueHandler() {
         return new FlowableReturnValueHandler();
+    }
+
+    public HandlerMethodReturnValueHandler singleMethodReturnValueHandler() {
+        return new SingleReturnValueHandler();
     }
 }

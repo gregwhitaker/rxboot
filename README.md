@@ -22,7 +22,7 @@ curl -X GET http://127.0.0.1:8080/observable
 200 OK
 
 {
-    "message": "Hello World!"
+    "message": "Hello World from Observable!"
 }
 ```
 
@@ -34,13 +34,25 @@ curl -X GET http://127.0.0.1:8080/flowable
 200 OK
 
 {
-    "message": "Hello World!"
+    "message": "Hello World from Flowable!"
+}
+```
+
+### Message (Hello World) using Single
+A basic hello world endpoint.
+```bash
+curl -X GET http://127.0.0.1:8080/single
+
+200 OK
+
+{
+    "message": "Hello World from Single!"
 }
 ```
 
 ## Spring Bits
 [Spring Configuration](src/main/java/io/expanse/rxboot/config) contains the Spring configuration bits that allow the 
-controllers to return raw `io.reactivex.Observable` or `io.reactivex.Flowable` types. Ideally these classes would be incorporated into an external JAR that 
+controllers to return raw `io.reactivex.Observable`, `io.reactivex.Flowable`, or `io.reactivex.Single` types. Ideally these classes would be incorporated into an external JAR that 
 each Spring application could use. Thereby reducing the code to simply RxJava only.
 
 ## License

@@ -7,7 +7,7 @@
  */
 package io.expanse.rxboot.controller;
 
-import io.reactivex.Flowable;
+import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,14 +18,14 @@ import java.util.Collections;
 import java.util.Map;
 
 /**
- * Example controller that contain endpoints that return straight {@link Flowable} types.
+ * Example controller that contain endpoints that return straight {@link Single} types.
  */
 @RestController
-public class FlowableController {
+public class SingleController {
 
-    @RequestMapping(value = "/flowable", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Flowable<Map<String, String>> getMessage() {
-        return Flowable.just(Collections.singletonMap("message", "Hello World from Flowable!"))
+    @RequestMapping(value = "/single", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Single<Map<String, String>> getMessage() {
+        return Single.just(Collections.singletonMap("message", "Hello World from Single!"))
                 .subscribeOn(Schedulers.computation());
     }
 }
