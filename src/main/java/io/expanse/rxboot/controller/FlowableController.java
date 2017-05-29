@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collections;
 import java.util.Map;
 
+/**
+ * Example controller that contain endpoints that return straight {@link Flowable} types.
+ */
 @RestController
 public class FlowableController {
 
