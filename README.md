@@ -14,10 +14,22 @@ This project demonstrates using [RxJava](https://github.com/ReactiveX/RxJava) wi
 
 ## Endpoints
 
-### Message (Hello World)
+### Message (Hello World) using Observable
 A basic hello world endpoint.
 ```bash
-curl -X GET http://127.0.0.1:8080/
+curl -X GET http://127.0.0.1:8080/observable
+
+200 OK
+
+{
+    "message": "Hello World!"
+}
+```
+
+### Message (Hello World) using Flowable
+A basic hello world endpoint.
+```bash
+curl -X GET http://127.0.0.1:8080/flowable
 
 200 OK
 
@@ -28,8 +40,8 @@ curl -X GET http://127.0.0.1:8080/
 
 ## Spring Bits
 [Spring Configuration](src/main/java/io/expanse/rxboot/config) contains the Spring configuration bits that allow the 
-controllers to return raw rx.Observable types. Ideally these classes would be incorporated into an external JAR that 
-each Spring application could use. There by reducing the code to simply RxJava only.
+controllers to return raw `io.reactivex.Observable` or `io.reactivex.Flowable` types. Ideally these classes would be incorporated into an external JAR that 
+each Spring application could use. Thereby reducing the code to simply RxJava only.
 
 ## License
 Copyright 2016 Ryan Scott

@@ -3,11 +3,11 @@
  * Released under the Apache 2 license
  * https://www.apache.org/licenses/LICENSE-2.0
  *
- * @authors Ryan Scott
+ * @authors Greg Whitaker
  */
 package io.expanse.rxboot.config;
 
-import io.reactivex.Observable;
+import io.reactivex.Flowable;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.context.request.async.DeferredResult;
@@ -16,17 +16,17 @@ import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 /**
- * Handler that ties the {@link Observable} returned from a controller to a {@link DeferredResult}.<br>
+ * Handler that ties the {@link Flowable} returned from a controller to a {@link DeferredResult}.<br>
  * This is used in conjunction with {@link RxbootConfiguration} to allow controllers to
- * return straight {@link Observable} types.
+ * return straight {@link Flowable} types.
  */
-public class ObservableReturnValueHandler implements HandlerMethodReturnValueHandler {
+public class FlowableReturnValueHandler implements HandlerMethodReturnValueHandler {
 
     @Override
     public boolean supportsReturnType(MethodParameter returnType) {
         Class parameterType = returnType.getParameterType();
 
-        return Observable.class.isAssignableFrom(parameterType);
+        return Flowable.class.isAssignableFrom(parameterType);
     }
 
     @Override
@@ -40,10 +40,8 @@ public class ObservableReturnValueHandler implements HandlerMethodReturnValueHan
         }
 
         final DeferredResult<Object> deferredResult = new DeferredResult<>();
-        Observable observable = (Observable) returnValue;
-        observable.subscribe(
-                result -> deferredResult.setResult(result)
-        );
+        Flowable flowable = (Flowable) returnValue;
+        flowable.subscribe(deferredResult::setResult);
 
         WebAsyncUtils.getAsyncManager(webRequest)
                 .startDeferredResultProcessing(deferredResult, mavContainer);

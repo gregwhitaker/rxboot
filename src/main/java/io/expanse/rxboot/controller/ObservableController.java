@@ -7,14 +7,14 @@
  */
 package io.expanse.rxboot.controller;
 
+import io.reactivex.Observable;
+import io.reactivex.schedulers.Schedulers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import rx.Observable;
-import rx.schedulers.Schedulers;
 
 import java.util.Collections;
 import java.util.Map;
@@ -27,7 +27,7 @@ public class ObservableController {
 
     private static final Logger LOG = LoggerFactory.getLogger(ObservableController.class);
 
-    @RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/observable", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Observable<Map<String, String>> getMessage() {
         return Observable.fromCallable(() -> {
             LOG.info("Creating message");

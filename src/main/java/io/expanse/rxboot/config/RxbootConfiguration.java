@@ -3,7 +3,7 @@
  * Released under the Apache 2 license
  * https://www.apache.org/licenses/LICENSE-2.0
  *
- * @authors Ryan Scott
+ * @authors Ryan Scott, Greg Whitaker
  */
 package io.expanse.rxboot.config;
 
@@ -19,8 +19,8 @@ import java.util.List;
 
 /**
  * Spring application configuration. This class configures Spring's {@link RequestMappingHandlerAdapter}
- * by adding {@link ObservableReturnValueHandler}. This creates a return value mapping for controllers returning
- * straight {@link rx.Observable} types.
+ * by adding {@link ObservableReturnValueHandler} and {@link FlowableReturnValueHandler}. This creates a return value mapping for controllers returning
+ * straight {@link io.reactivex.Observable} and {@link io.reactivex.Flowable} types.
  */
 @Configuration
 public class RxbootConfiguration {
@@ -34,6 +34,7 @@ public class RxbootConfiguration {
                 mappingHandlerAdapter.getReturnValueHandlers()
         );
         handlers.add(0, observMethodReturnValueHandler());
+        handlers.add(1, flowableMethodReturnValueHandler());
 
         mappingHandlerAdapter.setReturnValueHandlers(handlers);
     }
@@ -41,5 +42,10 @@ public class RxbootConfiguration {
     @Bean
     public HandlerMethodReturnValueHandler observMethodReturnValueHandler() {
         return new ObservableReturnValueHandler();
+    }
+
+    @Bean
+    public HandlerMethodReturnValueHandler flowableMethodReturnValueHandler() {
+        return new FlowableReturnValueHandler();
     }
 }
