@@ -1,6 +1,12 @@
+/*
+ * Copyright 2016
+ * Released under the Apache 2 license
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * @authors Greg Whitaker
+ */
 package io.expanse.rxboot.config;
 
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.context.request.NativeWebRequest;
